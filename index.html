@@ -12,24 +12,24 @@
         <details class="head">
             <summary><span class="question">Question 1:</span><br>
                 <pre>
-                    function counter(){
-                        var counter = 0;
-                
-                        function IncreaseCounter() {
-                            return counter += 1;
-                        };
-                
-                        return IncreaseCounter;
-                    }
-                
-                    var counter = counter();
-                    alert(counter());
-                    alert(counter());
-                    alert(counter());
-                    alert(counter());
+                    01 function counter(){
+                    02     var counter = 0;
+                    03
+                    04    function IncreaseCounter() {
+                    05        return counter += 1;
+                    06    };
+                    07
+                    08    return IncreaseCounter;
+                    09 }
+                    10
+                    11 var counter = counter();
+                    12 alert(counter());
+                    13 alert(counter());
+                    14 alert(counter());
+                    15 alert(counter());
                 </pre>
             </summary>
-            <p></p>
+            <p>line 12: 1;<br>line 13: 2;<br>line 14: 3;<br>line 15: 4;</p>
             <p>In this code, the counter function creates a closure that contains a local variable counter and an inner function increaseCounter. The inner function can access and modify the counter variable due to closures in JavaScript. When the counter function is called and assigned to the counter variable, it returns the increaseCounter function.Each time counter(), it invokes the increaseCounter function, which increments the counter variable. As a result, the counter value increasing with each subsequent call to counter().</p>
         </details>
         <details class="head">
