@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <title>closures</title>
+</head>
+<body>
+    <h1>CLOSURES</h1>
+    <div>
+        <details class="head">
+            <summary><span class="question">Question 1:</span><br>
+                <pre>
+                    function counter(){
+                        var counter = 0;
+                
+                        function IncreaseCounter() {
+                            return counter += 1;
+                        };
+                
+                        return IncreaseCounter;
+                    }
+                
+                    var counter = counter();
+                    alert(counter());
+                    alert(counter());
+                    alert(counter());
+                    alert(counter());
+                </pre>
+            </summary>
+            <p></p>
+            <p>In this code, the counter function creates a closure that contains a local variable counter and an inner function increaseCounter. The inner function can access and modify the counter variable due to closures in JavaScript. When the counter function is called and assigned to the counter variable, it returns the increaseCounter function.Each time counter(), it invokes the increaseCounter function, which increments the counter variable. As a result, the counter value increasing with each subsequent call to counter().</p>
+        </details>
+        <details class="head">
+            <summary><span class="question">Question 2:</span><br>
+                <pre>
+                    01 let count = 0;
+                    02 (function () {
+                    03     if (count === 0) {
+                    04         let count = 1;
+                    05         console.log(count); // What is logged?
+                    06     }
+                    07     console.log(count); // What is logged?
+                    08 })();
+                </pre>
+            </summary>
+            <p>line 05: 1  ; here inside the if condition block scope is created having let count and value 1, then the console.log will print 1.</p>
+            <p>line 07: 0  ;  Then back to outer scope such that the consol.log on line 07 will access the outside function and value will be 0</p>
+        </details>
+        <details class="head">
+            <summary><span class="question">Question 3:</span><br>
+                <pre id="console_answer3">
+                    01 for (var i = 0; i < 3; i++) {
+                    02     setTimeout(function log() {
+                    03         console.log(i); // What is logged?
+                    04     }, 1000);
+                    05 }
+                </pre>
+            </summary>
+            <p>line 03: 3 <br>3 <br>3 <br> here the code runs 3 times of setTimeout in 1000ms/1s, but inside for loop var is used which is function scope(var) not a block scope(let), console.log is already finished and the value of i is printed as 3</p>
+        </details>
+        <details class="head">
+            <summary><span class="question">Question 4:</span><br>Write a code to calculate area of a rectangle using inner function. In this case outer function should accept parameter length and inner function should accept parameter breadth.</summary>
+            <pre>
+                function calculateRectangleArea(length) {
+                    function innerFunction(breadth) {
+                      return length * breadth;
+                    }
+                  
+                    return innerFunction;
+                  }
+            </pre>
+        </details>
+        <details class="head">
+            <summary><span class="question">Question 5:</span><br>Take a variable in outer function and create an inner function to increase the counter every time it is called.</summary>
+            <pre id="console_answer4_1">
+                01  function counter() {
+                02     let count = 0;
+                03    
+                04     function incrementCounter() {
+                05       count++;
+                06       console.log(`Counter: ${count}`);
+                07     }
+                08   
+                09     return incrementCounter;
+                10  } 
+                11  
+                12  let counterIncrement = counter();
+                13  counterIncrement(); // 1
+                14  counterIncrement(); // 2
+                15  counterIncrement(); // 3
+                16  counterIncrement(); // 4
+            </pre>
+        </details>
+        <details class="head">
+            <summary><span class="question">Question 6:</span><br>
+                <pre>
+                    <span>"Print output:</span>
+                        01 var a = 12;
+                        02 (function () {
+                        03   alert(a);
+                        04 })();"
+                </pre>
+            </summary>
+            <p id="console_answer4_1">line 03: 12 ; here 01 line is declared "a" and having value 12 which is in global scope, then IIFE is called and it is anonymous function, inside alret which is called variable "a", therefore "a" variable is accessed from the outer (global) scope because it's not defined inside the function and answer is displayed as 12.</p>
+        </details>
+        <details class="head">
+        <summary><span class="question">Question 7:</span><br>
+            <pre>
+                01 var a = 10;  // Declare a global variable 'a' and assign it the value 10.
+                02 var x = (function () {
+                03   var a = 12; // Declare a local variable 'a' with the value 12 inside an anonymous function.
+                04   return function () {
+                05     alert(a); // Define an inner anonymous function that alerts the value of 'a'.
+                06   };
+                07 })();
+                08 x();"
+            </pre>
+        </summary>
+        <p>line 05: 12 ; the function assigned to x is called using x(). This will trigger the inner function inside the closure, which will display an alert with the value of the local variable "a". Since the inner function has access to the closure's scope, it will display 12.</p>
+        </details>
+        <details class="head">
+            <summary><span class="question">Question 8:</span><br>
+                <pre>
+                    <span>Guess the Output</span>
+                    01 var globalVar = "xyz";
+                    02
+                    03 (function outerFunc(outerArg) {
+                    04    var outerVar = 'a';
+                    05    (function innerFunc(innerArg) {
+                    06        var innerVar = 'b';
+                    07        console.log(
+                    08        "outerArg = " + outerArg + "\n" +
+                    09        "innerArg = " + innerArg + "\n" +
+                    10        "outerVar = " + outerVar + "\n" +
+                    11        "innerVar = " + innerVar + "\n" +
+                    12        "globalVar = " + globalVar);
+                    13    })(456);
+                    14 })(123);
+                </pre>
+            </summary>
+            <p>here there is globalVar declared in global scope and given value "xyz", and immediately IIFE is called with name outerFunc having parameter "outerArg" and assigned local variable "outerVar" and value given "a"; inside this function again IIFe is called with name innerFunc and parameter "innerArg" and inside this varible is created having value "b" which is local variable and console templete is created and for innerFunc arrgument is value is given as 456 and for outerFunc arrgument value is 123</p>
+            <p id="console_answer4_1">line 08: 123;here the console is accessing outerFunc argument declared as 123.<br>
+            line 09: 456; here the console is accessing innerFunc argument declared as 456.<br>
+            line 10: a; here the console is accessing outerFunc varible by closures in JavaScript which value is "a".<br>
+            line 11: b;here the console is accessing innerFunc varible which value is "b".<br>
+            line 12: xyz; here the console is accessing globalspace varible by closures in JavaScript which value is "xyz".</p>
+        </details>
+    </div>
+</body>
+</html>
